@@ -1,7 +1,7 @@
-[Angular Directive](http://igorlino.github.io/angular-elevatezoom-plus/)
+[Angular Colorbox](http://igorlino.github.io/angular-colorbox/)
 ================================
 
-[Angular EZ Plus](http://igorlino.github.io/angular-elevatezoom-plus/) is directive for the [ElevateZoom Plus](http://igorlino.github.io/elevatezoom-plus/) library.
+[Angular Colorbox](http://igorlino.github.io/angular-colorbox/) is directive for the lightweight customizable lightbox [Colorbox](https://github.com/jackmoore/colorbox) plugin.
 
 ## Features
 
