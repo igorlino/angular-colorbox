@@ -40,6 +40,9 @@
     <script type="text/javascript" src="http://fancyapps.com/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
     <link rel="stylesheet" type="text/css" href="http://fancyapps.com/fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
 
+    <script src='https://rawgit.com/igorlino/angular-elevatezoom-plus/master/js/ezplus.module.js'></script>
+    <script src='https://rawgit.com/igorlino/angular-elevatezoom-plus/master/js/ezplus.directive.js'></script>
+
     <script src='../js/colorbox.module.js'></script>
     <script src='../js/colorbox.directive.js'></script>
 
@@ -57,7 +60,10 @@
 
 </head>
 
-<body ng-app="colorboxdemo" ng-controller="ColorboxCtrl">
+<body
+    ng-app="colorboxdemo"
+    ng-controller="ColorboxCtrl"
+    ng-init="approot='';zoom01=false;zoom01a=false;zoom03=false;zoom04=false;">
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -90,18 +96,27 @@
         <p class="lead">Use these examples as a way to quickly start any new web project that requires image zooming.</p>
 
 
-        <h2>Basic Click Example</h2>
-
+        <h2>Basic Click Example {{zoom01}}</h2>
 
         <img
             id="zoom_01"
-            src="images/large/image1.jpg"
+            src="{{approot}}images/large/image1.jpg"
             width="400"
-            colorbox
-            colorbox-options="{href:'images/large/image1.jpg'}"
+
+            ez-plus
+            data-zoom-image="{{approot}}images/large/image1.jpg"
+
+            ng-click="zoom01=true;"
+
             />
 
-        <script>$("#zoom_01").ezPlus();</script>
+        <colorbox
+            box-for="#zoom_01"
+            open="zoom01"
+            options="{href:'{{approot}}images/large/image1.jpg'}">
+
+        </colorbox>
+        <script>/*$("#zoom_01").ezPlus();*/</script>
 
         <hr/>
 
@@ -109,13 +124,22 @@
 
         <img
             id="zoom_01a"
-            src="images/large/image2.jpg"
+            src="{{approot}}images/large/image2.jpg"
             width="400"
-            colorbox
-            colorbox-options="{href:'images/large/image2.jpg',  width:'75%', height:'75%'}"
+
+            ez-plus
+            data-zoom-image="{{approot}}images/large/image2.jpg"
+
+            ng-click="zoom01a=true;"
             />
 
-        <script>$("#zoom_01a").ezPlus();</script>
+        <colorbox
+            box-for="#zoom_01a"
+            open="zoom01a"
+            options="{href:'{{approot}}images/large/image2.jpg',  width:'75%', height:'75%'}">
+
+        </colorbox>
+        <script>/*$("#zoom_01a").ezPlus();*/</script>
 
         <hr/>
 
@@ -123,23 +147,36 @@
 
 
         <img id="zoom_03"
-             colorbox
-             colorbox-selector=".img-group-01"
-             colorbox-options="{rel:'img-group-01', slideshow:false, open:true}"
-             src="images/small/image1.jpg" data-zoom-image="images/large/image1.jpg"/>
+
+             src="{{approot}}images/small/image1.jpg"
+
+             ez-plus
+             data-zoom-image="{{approot}}images/large/image1.jpg"
+
+             ng-click="zoom03=true;"
+            />
 
         <div id="gallery_01">
             <a class="img-group-01"
-               ng-repeat="image in imagesForGallery"
-               data-image="{{image.small}}"
-               data-zoom-image="{{image.large}}"
-               href="{{image.large}}">
-                <img ng-src="{{image.thumb}}"/>
+               ng-repeat="image2 in imagesForGallery"
+               data-image="{{approot}}{image2.small}}"
+               data-zoom-image="{{approot}}{{image2.large}}"
+               href="{{approot}}{{image2.large}}">
+                {{approot}}{{image2.large}}
+                <img ng-src="{{approot}}{{image2.thumb}}"/>
             </a>
         </div>
 
+        <colorbox
+            box-for=".img-group-01"
+            open="zoom03"
+            options="{rel:'img-group-01', slideshow:false, open:true}">
+
+        </colorbox>
+
+
         <script type="text/javascript">
-            $(document).ready(function () {
+           /* $(document).ready(function () {
                 $("#zoom_03").ezPlus({
                     gallery: 'gallery_01',
                     cursor: 'pointer',
@@ -155,7 +192,7 @@
                     return false;
                 });
 
-            });
+            });*/
 
         </script>
 
@@ -165,33 +202,47 @@
 
 
         <img id="zoom_04"
-             colorbox
-             colorbox-selector=".img-group-02"
-             colorbox-options="{rel:'img-group-02', slideshow:true, open:true}"
-             src="images/small/image1.jpg" data-zoom-image="images/large/image1.jpg"/>
+
+             src="{{approot}}images/small/image1.jpg"
+
+             ez-plus
+             data-zoom-image="{{approot}}images/large/image1.jpg"
+             ng-click="zoom04=true;"
+            />
 
         <div id="gallery_04">
             <a class="img-group-02"
                ng-repeat="image in imagesForGallery"
-               data-image="{{image.small}}"
-               data-zoom-image="{{image.large}}"
-               href="{{image.large}}">
-                <img ng-src="{{image.thumb}}"/>
+
+               data-image="{{approot}}{{image.small}}"
+               data-zoom-image="{{approot}}{{image.large}}"
+
+               href="{{approot}}{{image.large}}">
+                {{approot}}{{image.large}}
+                <img ng-src="{{approot}}{{image.thumb}}"/>
             </a>
         </div>
 
+        <colorbox
+
+            box-for=".img-group-02"
+            open="zoom04"
+            options="{rel:'img-group-02', slideshow:true, open:true}">
+
+        </colorbox>
+
         <script type="text/javascript">
-            $(document).ready(function () {
-                $("#zoom_04").ezPlus({
-                    gallery: 'gallery_04',
-                    cursor: 'pointer',
-                    galleryActiveClass: "active",
-                    imageCrossfade: true,
-                    loadingIcon: "images/spinner.gif"
-                });
+            /*$(document).ready(function () {
+             $("#zoom_04").ezPlus({
+             gallery: 'gallery_04',
+             cursor: 'pointer',
+             galleryActiveClass: "active",
+             imageCrossfade: true,
+             loadingIcon: "images/spinner.gif"
+             });
 
-            });
-
+             });
+             */
         </script>
     </div>
 
