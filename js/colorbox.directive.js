@@ -30,7 +30,7 @@
 
         controller.$inject = ['$scope'];
         function controller($scope) {
-            console.log($scope.open);
+            //console.log($scope.open);
         }
 
         link.$inject = ['$scope', '$element', '$attributes'];
@@ -38,7 +38,7 @@
             var cb = null;
 
             /*$scope.$watch('open', function (newValue, oldValue) {
-             console.log("watch $scope.open("+$scope.open+") " + oldValue + "->" + newValue);
+             //console.log("watch $scope.open("+$scope.open+") " + oldValue + "->" + newValue);
              if (oldValue !== newValue) {
              updateOpen();
              }
@@ -70,32 +70,32 @@
                     boxFor: $attributes.boxFor,
                     onOpen: function () {
                         $scope.open = true;
-                        console.log("open")
+                        //console.log("open")
                         if ($scope.onOpen()) {
                             $scope.onOpen()();
                         }
                     },
                     onLoad: function () {
-                        console.log("load")
+                        //console.log("load")
                         if ($scope.onLoad()) {
                             $scope.onLoad()();
                         }
                     },
                     onComplete: function () {
-                        console.log("complete")
+                        //console.log("complete")
                         onComplete();
                         if ($scope.onComplete()) {
                             $scope.onComplete()();
                         }
                     },
                     onCleanup: function () {
-                        console.log("cleanup")
+                        //console.log("cleanup")
                         if ($scope.onCleanup()) {
                             $scope.onCleanup()();
                         }
                     },
                     onClosed: function () {
-                        console.log("closing")
+                        //console.log("closing")
                         $scope.open = false;
                         if ($scope.onClosed()) {
                             $scope.onClosed()();

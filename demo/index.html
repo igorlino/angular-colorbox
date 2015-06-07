@@ -97,14 +97,15 @@
 
 
         <h2>Basic Click Example {{zoom01}}</h2>
-
         <img
             id="zoom_01"
             src="{{approot}}images/large/image1.jpg"
             width="400"
 
             ez-plus
-            data-zoom-image="{{approot}}images/large/image1.jpg"
+            ezp-model="zoomModel1"
+            ezp-options="zoomOptions"
+            data-image-zoom="{{approot}}images/large/image1.jpg"
 
             ng-click="zoom01=true;"
 
@@ -128,7 +129,9 @@
             width="400"
 
             ez-plus
-            data-zoom-image="{{approot}}images/large/image2.jpg"
+            ezp-model="zoomModel2"
+            ezp-options="zoomOptions"
+            data-image-zoom="{{approot}}images/large/image2.jpg"
 
             ng-click="zoom01a=true;"
             />
@@ -145,13 +148,14 @@
 
         <h2>Colorbox Gallery</h2>
 
-
         <img id="zoom_03"
 
-             src="{{approot}}images/small/image1.jpg"
+             src="{{approot}}images/large/image1.jpg"
 
              ez-plus
-             data-zoom-image="{{approot}}images/large/image1.jpg"
+             ezp-model="zoomModelGallery01"
+             ezp-options="zoomOptionsGallery01"
+             data-image-zoom="{{approot}}images/large/image1.jpg"
 
              ng-click="zoom03=true;"
             />
@@ -159,10 +163,8 @@
         <div id="gallery_01">
             <a class="img-group-01"
                ng-repeat="image2 in imagesForGallery"
-               data-image="{{approot}}{image2.small}}"
-               data-zoom-image="{{approot}}{{image2.large}}"
-               href="{{approot}}{{image2.large}}">
-                {{approot}}{{image2.large}}
+               ng-click="zoomModelGallery01=image2;"
+                href="#">
                 <img ng-src="{{approot}}{{image2.thumb}}"/>
             </a>
         </div>
@@ -200,13 +202,14 @@
 
         <h2>Colorbox Slideshow</h2>
 
-
         <img id="zoom_04"
 
-             src="{{approot}}images/small/image1.jpg"
+             src="{{approot}}images/large/image1.jpg"
 
              ez-plus
-             data-zoom-image="{{approot}}images/large/image1.jpg"
+             ezp-model="zoomModelGallery04"
+             ezp-options="zoomOptionsGallery04"
+             data-image-zoom="{{approot}}images/large/image1.jpg"
              ng-click="zoom04=true;"
             />
 
@@ -214,11 +217,8 @@
             <a class="img-group-02"
                ng-repeat="image in imagesForGallery"
 
-               data-image="{{approot}}{{image.small}}"
-               data-zoom-image="{{approot}}{{image.large}}"
-
-               href="{{approot}}{{image.large}}">
-                {{approot}}{{image.large}}
+               ng-click="zoomModelGallery04=image;"
+               href>
                 <img ng-src="{{approot}}{{image.thumb}}"/>
             </a>
         </div>

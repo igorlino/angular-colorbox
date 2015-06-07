@@ -1,4 +1,5 @@
 angular.module('colorboxdemo', [
     'colorboxdemo.controllers',
-    'colorbox'
+    'colorbox',
+    'ezplus'
 ]);
