@@ -105,6 +105,9 @@
 
 
         <h2>Basic Click Example</h2>
+
+        <p>Click the thumbnail image.</p>
+
         <img
             id="zoom_01"
 
@@ -126,6 +129,8 @@
 
         <h2>Basic Colorbox modal example with Width/Height 75%</h2>
 
+        <p>Click the thumbnail image.</p>
+
         <img
             id="zoom_01a"
             width="400"
@@ -145,6 +150,8 @@
 
         <hr/>
         <h2>Basic Gallery</h2>
+
+        <p>Click a thumbnail image.</p>
 
         <div id="gallery_05">
             <a ng-repeat="image3 in imagesForGallery"
@@ -170,16 +177,7 @@
         <hr/>
         <h2>Gallery with ElevateZoom Plus</h2>
 
-        <img id="zoom_03"
-
-             ng-src="{{approot}}images/large/image2.jpg"
-
-             ng-click="setScopeValue('zoom03',true);"
-
-             ez-plus
-             ezp-model="zoomModelGallery01"
-             ezp-options="zoomOptionsGallery01"
-            />
+        <p>Click a thumbnail image then click over the large image.</p>
 
         <div id="gallery_01">
             <a ng-repeat="image2 in imagesForGallery"
@@ -194,6 +192,17 @@
                 <img ng-src="{{approot}}{{image2.thumb}}"/>
             </a>
         </div>
+
+        <img id="zoom_03"
+
+             ng-src="{{approot}}images/large/image2.jpg"
+
+             ng-click="setScopeValue('zoom03',true);"
+
+             ez-plus
+             ezp-model="zoomModelGallery01"
+             ezp-options="zoomOptionsGallery01"
+                />
 
         <colorbox
             box-for=".img-group-01"
