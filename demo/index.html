@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="https://rawgit.com/igorlino/elevatezoom-plus/master/css/jquery.ez-plus.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
     <script src='https://rawgit.com/igorlino/elevatezoom-plus/master/src/jquery.ez-plus.js'></script>
+    <!--<script src='../js/jquery.ez-plus.js'></script>-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular.js"></script>
 
@@ -99,15 +100,11 @@
         <h2>Basic Click Example {{zoom01}}</h2>
         <img
             id="zoom_01"
-            src="{{approot}}images/large/image1.jpg"
-            width="400"
 
+            width="400"
             ez-plus
             ezp-model="zoomModel1"
             ezp-options="zoomOptions"
-            data-image-zoom="{{approot}}images/large/image1.jpg"
-
-            ng-click="zoom01=true;"
 
             />
 
@@ -117,7 +114,6 @@
             options="{href:'{{approot}}images/large/image1.jpg'}">
 
         </colorbox>
-        <script>/*$("#zoom_01").ezPlus();*/</script>
 
         <hr/>
 
@@ -125,15 +121,12 @@
 
         <img
             id="zoom_01a"
-            src="{{approot}}images/large/image2.jpg"
             width="400"
 
             ez-plus
             ezp-model="zoomModel2"
             ezp-options="zoomOptions"
-            data-image-zoom="{{approot}}images/large/image2.jpg"
 
-            ng-click="zoom01a=true;"
             />
 
         <colorbox
@@ -142,28 +135,24 @@
             options="{href:'{{approot}}images/large/image2.jpg',  width:'75%', height:'75%'}">
 
         </colorbox>
-        <script>/*$("#zoom_01a").ezPlus();*/</script>
 
         <hr/>
-
         <h2>Colorbox Gallery</h2>
 
         <img id="zoom_03"
-
-             src="{{approot}}images/large/image1.jpg"
-
              ez-plus
              ezp-model="zoomModelGallery01"
              ezp-options="zoomOptionsGallery01"
-             data-image-zoom="{{approot}}images/large/image1.jpg"
-
-             ng-click="zoom03=true;"
             />
 
         <div id="gallery_01">
             <a class="img-group-01"
                ng-repeat="image2 in imagesForGallery"
-               ng-click="zoomModelGallery01=image2;"
+               ng-click="setActiveImageInGallery('zoomModelGallery01',image2);"
+
+               data-image="{{approot}}{{image2.small}}"
+               data-zoom-image="{{approot}}{{image2.large}}"
+
                 href="#">
                 <img ng-src="{{approot}}{{image2.thumb}}"/>
             </a>
@@ -175,7 +164,6 @@
             options="{rel:'img-group-01', slideshow:false, open:true}">
 
         </colorbox>
-
 
         <script type="text/javascript">
            /* $(document).ready(function () {
@@ -204,21 +192,21 @@
 
         <img id="zoom_04"
 
-             src="{{approot}}images/large/image1.jpg"
-
              ez-plus
              ezp-model="zoomModelGallery04"
              ezp-options="zoomOptionsGallery04"
              data-image-zoom="{{approot}}images/large/image1.jpg"
-             ng-click="zoom04=true;"
             />
 
         <div id="gallery_04">
             <a class="img-group-02"
                ng-repeat="image in imagesForGallery"
+               ng-click="setActiveImageInGallery('zoomModelGallery04',image);"
 
-               ng-click="zoomModelGallery04=image;"
-               href>
+               data-image="{{approot}}{{image.small}}"
+               data-zoom-image="{{approot}}{{image.large}}"
+
+               href="#">
                 <img ng-src="{{approot}}{{image.thumb}}"/>
             </a>
         </div>

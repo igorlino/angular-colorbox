@@ -39,7 +39,9 @@ angular.module('colorboxdemo.controllers', []).
             zoomWindowFadeIn: 500,
             zoomWindowFadeOut: 500,
             lensFadeIn: 500,
-            lensFadeOut: 500
+            lensFadeOut: 500,
+
+            initial: 'small'
         };
 
         $scope.zoomOptionsGallery01 = {
@@ -52,11 +54,13 @@ angular.module('colorboxdemo.controllers', []).
             lensFadeIn: 500,
             lensFadeOut: 500,
 
+            initial: 'small',
+
             gallery: 'gallery_01',
             cursor: 'pointer',
             galleryActiveClass: "active",
             imageCrossfade: true,
-            loadingIcon: "images/spinner.gif"
+            loadingIcon: false
         };
 
         $scope.zoomOptionsGallery04 = {
@@ -69,11 +73,13 @@ angular.module('colorboxdemo.controllers', []).
             lensFadeIn: 500,
             lensFadeOut: 500,
 
+            initial: 'small',
+
             gallery: 'gallery_04',
             cursor: 'pointer',
             galleryActiveClass: "active",
             imageCrossfade: true,
-            loadingIcon: "images/spinner.gif"
+            loadingIcon: false
         };
 
         $scope.zoomModel1 = $scope.imagesForGallery[0];
@@ -81,5 +87,10 @@ angular.module('colorboxdemo.controllers', []).
 
         $scope.zoomModelGallery01 = $scope.imagesForGallery[1];
         $scope.zoomModelGallery04 = $scope.imagesForGallery[1];
+        $scope.setActiveImageInGallery = function (prop, img) {
+            $scope[prop] = img;
+            //console.log(img);
+        };
     });
+
 
