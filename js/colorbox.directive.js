@@ -30,74 +30,64 @@
 
         controller.$inject = ['$scope'];
         function controller($scope) {
-            //console.log($scope.open);
+
         }
 
         link.$inject = ['$scope', '$element', '$attributes'];
         function link($scope, $element, $attributes, controller) {
             var cb = null;
 
-            /*$scope.$watch('open', function (newValue, oldValue) {
-             //console.log("watch $scope.open("+$scope.open+") " + oldValue + "->" + newValue);
-             if (oldValue !== newValue) {
-             updateOpen();
-             }
-             });*/
+            $scope.$watch('open', function (newValue, oldValue) {
+                //console.log("watch $scope.open(" + $scope.open + ") " + oldValue + "->" + newValue);
+                if (oldValue !== newValue) {
+                    updateOpen(newValue);
+                }
+            });
 
             $scope.$on('$destroy', function () {
                 $element.remove();
             });
 
-            updateOpen();
+            init();
 
-            function updateOpen() {
-                /*if ($scope.open) {
-                 init();
-                 } else {
-                 if (cb) {
-                 $.colorbox.close();
-                 }
-                 }*/
-                init();
+            function updateOpen(newValue) {
+                if (newValue) {
+                    init(newValue);
+                } else {
+                    $.colorbox.close();
+                }
             }
 
-            function init() {
-                if (cb) {
-                    return;
-                }
+            function init(open) {
                 var options = {
                     href: $attributes.src,
                     boxFor: $attributes.boxFor,
                     onOpen: function () {
-                        $scope.open = true;
-                        //console.log("open")
-                        if ($scope.onOpen()) {
+                        if ($scope.onOpen && $scope.onOpen()) {
                             $scope.onOpen()();
                         }
                     },
                     onLoad: function () {
-                        //console.log("load")
-                        if ($scope.onLoad()) {
+                        if ($scope.onLoad && $scope.onLoad()) {
                             $scope.onLoad()();
                         }
                     },
                     onComplete: function () {
-                        //console.log("complete")
                         onComplete();
-                        if ($scope.onComplete()) {
+                        if ($scope.onComplete && $scope.onComplete()) {
                             $scope.onComplete()();
                         }
                     },
                     onCleanup: function () {
-                        //console.log("cleanup")
-                        if ($scope.onCleanup()) {
+                        if ($scope.onCleanup && $scope.onCleanup()) {
                             $scope.onCleanup()();
                         }
                     },
                     onClosed: function () {
-                        //console.log("closing")
-                        $scope.open = false;
-                        if ($scope.onClosed()) {
+                        $scope.$apply(function() {
+                            $scope.open = false;
+                        });
+                        if ($scope.onClosed && $scope.onClosed()) {
                             $scope.onClosed()();
                         }
                     }
@@ -119,15 +109,20 @@
                     }
                 }
 
-
-                if (options.boxFor) {
-                    //opens the element by id boxFor
-                    cb = $(options.boxFor).colorbox(options);
-                } else if (options.href) {
-                    //opens the colorbox using an href.
-                    cb = $.colorbox(options);
+                if (typeof(open) !== 'undefined') {
+                    options.open = open;
                 }
 
+                //wait for the DOM view to be ready
+                $timeout(function () {
+                    if (options.boxFor) {
+                        //opens the element by id boxFor
+                        cb = $(options.boxFor).colorbox(options);
+                    } else if (options.href) {
+                        //opens the colorbox using an href.
+                        cb = $.colorbox(options);
+                    }
+                }, 0);
             }
 
             function onComplete() {

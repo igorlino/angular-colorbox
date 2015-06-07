@@ -86,11 +86,16 @@ angular.module('colorboxdemo.controllers', []).
         $scope.zoomModel2 = $scope.imagesForGallery[1];
 
         $scope.zoomModelGallery01 = $scope.imagesForGallery[1];
-        $scope.zoomModelGallery04 = $scope.imagesForGallery[1];
+        $scope.zoomModelGallery04 = $scope.imagesForGallery[3];
+        $scope.zoomModelGallery05 = $scope.imagesForGallery[0];
         $scope.setActiveImageInGallery = function (prop, img) {
             $scope[prop] = img;
             //console.log(img);
         };
+        $scope.setScopeValue = function (prop, value) {
+            $scope[prop] = value;
+        };
+
     });
 
 

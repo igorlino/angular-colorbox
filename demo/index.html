@@ -39,7 +39,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!-- Add fancyBox main JS and CSS files -->
     <script type="text/javascript" src="http://fancyapps.com/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-    <link rel="stylesheet" type="text/css" href="http://fancyapps.com/fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+    <link rel="stylesheet" type="text/css" href="http://fancyapps.com/fancybox/source/jquery.fancybox.css?v=2.1.5"
+          media="screen"/>
 
     <script src='https://rawgit.com/igorlino/angular-elevatezoom-plus/master/js/ezplus.module.js'></script>
     <script src='https://rawgit.com/igorlino/angular-elevatezoom-plus/master/js/ezplus.directive.js'></script>
@@ -50,13 +51,10 @@
     <script src='controller.js'></script>
     <script src='app.js'></script>
 
-    <link rel="stylesheet" type="text/css" href="colorbox-darktheme.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="colorbox-darktheme.css" media="screen"/>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/jquery.colorbox.js'></script>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js'></script>
-
-
-
 
 
 </head>
@@ -64,7 +62,7 @@
 <body
     ng-app="colorboxdemo"
     ng-controller="ColorboxCtrl"
-    ng-init="approot='';zoom01=false;zoom01a=false;zoom03=false;zoom04=false;">
+    ng-init="approot='';zoom01=false;zoom01a=false;zoom03=false;zoom04=false;zoom05=false">
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -94,10 +92,11 @@
 
         <h2>Basic Colorbox modal example</h2>
 
-        <p class="lead">Use these examples as a way to quickly start any new web project that requires image zooming.</p>
+        <p class="lead">Use these examples as a way to quickly start any new web project that requires image
+            zooming.</p>
 
 
-        <h2>Basic Click Example {{zoom01}}</h2>
+        <h2>Basic Click Example</h2>
         <img
             id="zoom_01"
 
@@ -137,23 +136,53 @@
         </colorbox>
 
         <hr/>
-        <h2>Colorbox Gallery</h2>
+        <h2>Basic Gallery</h2>
+
+        <div id="gallery_05">
+            <a ng-repeat="image3 in imagesForGallery"
+
+               class="img-group-05"
+               href="{{approot}}{{image3.large}}"
+
+               ng-click="setActiveImageInGallery('zoomModelGallery05',image3);"
+               >
+
+                <img ng-src="{{approot}}{{image3.thumb}}"/>
+            </a>
+        </div>
+
+        <colorbox
+            box-for=".img-group-05"
+            open="zoom05"
+            options="{rel:'img-group-05', slideshow:false, open:false}">
+
+        </colorbox>
+
+
+        <hr/>
+        <h2>Gallery with ElevateZoom Plus</h2>
 
         <img id="zoom_03"
+
+             ng-src="{{approot}}images/large/image2.jpg"
+
+             ng-click="setScopeValue('zoom03',true);"
+
              ez-plus
              ezp-model="zoomModelGallery01"
              ezp-options="zoomOptionsGallery01"
             />
 
         <div id="gallery_01">
-            <a class="img-group-01"
-               ng-repeat="image2 in imagesForGallery"
+            <a ng-repeat="image2 in imagesForGallery"
+
+               class="img-group-01"
+               href="{{approot}}{{image2.large}}"
+
                ng-click="setActiveImageInGallery('zoomModelGallery01',image2);"
-
                data-image="{{approot}}{{image2.small}}"
-               data-zoom-image="{{approot}}{{image2.large}}"
+               data-zoom-image="{{approot}}{{image2.large}}">
 
-                href="#">
                 <img ng-src="{{approot}}{{image2.thumb}}"/>
             </a>
         </div>
@@ -161,77 +190,12 @@
         <colorbox
             box-for=".img-group-01"
             open="zoom03"
-            options="{rel:'img-group-01', slideshow:false, open:true}">
-
+            options="{rel:'img-group-01', slideshow:false, open:false}">
         </colorbox>
 
-        <script type="text/javascript">
-           /* $(document).ready(function () {
-                $("#zoom_03").ezPlus({
-                    gallery: 'gallery_01',
-                    cursor: 'pointer',
-                    galleryActiveClass: "active",
-                    imageCrossfade: true,
-                    loadingIcon: "images/spinner.gif"
-                });
-
-                $("#zoom_03").bind("click", function (e) {
-                    var ez = $('#zoom_03').data('ezPlus');
-                    //ez.closeAll(); //NEW: This function force hides the lens, tint and window
-                    //$.fancybox(ez.getGalleryList());
-                    return false;
-                });
-
-            });*/
-
-        </script>
 
         <hr/>
 
-        <h2>Colorbox Slideshow</h2>
-
-        <img id="zoom_04"
-
-             ez-plus
-             ezp-model="zoomModelGallery04"
-             ezp-options="zoomOptionsGallery04"
-             data-image-zoom="{{approot}}images/large/image1.jpg"
-            />
-
-        <div id="gallery_04">
-            <a class="img-group-02"
-               ng-repeat="image in imagesForGallery"
-               ng-click="setActiveImageInGallery('zoomModelGallery04',image);"
-
-               data-image="{{approot}}{{image.small}}"
-               data-zoom-image="{{approot}}{{image.large}}"
-
-               href="#">
-                <img ng-src="{{approot}}{{image.thumb}}"/>
-            </a>
-        </div>
-
-        <colorbox
-
-            box-for=".img-group-02"
-            open="zoom04"
-            options="{rel:'img-group-02', slideshow:true, open:true}">
-
-        </colorbox>
-
-        <script type="text/javascript">
-            /*$(document).ready(function () {
-             $("#zoom_04").ezPlus({
-             gallery: 'gallery_04',
-             cursor: 'pointer',
-             galleryActiveClass: "active",
-             imageCrossfade: true,
-             loadingIcon: "images/spinner.gif"
-             });
-
-             });
-             */
-        </script>
     </div>
 
 </div>
