@@ -2,6 +2,10 @@ angular.module('colorboxdemo.controllers', []).
     controller('ColorboxCtrl', function ($scope, $location) {
         $scope.imagesForGallery = [];
         $scope.setApproot = function(appRoot) {
+            //only change when needed.
+            if ($scope.approot && appRoot === $scope.approot) {
+                return;
+            }
             $scope.approot = appRoot;
             $scope.imagesForGallery = [
                 {
@@ -30,6 +34,13 @@ angular.module('colorboxdemo.controllers', []).
                     large: appRoot + 'images/large/image5.jpg'
                 }
             ];
+
+            $scope.zoomModel1 = $scope.imagesForGallery[0];
+            $scope.zoomModel2 = $scope.imagesForGallery[1];
+
+            $scope.zoomModelGallery01 = $scope.imagesForGallery[1];
+            $scope.zoomModelGallery04 = $scope.imagesForGallery[3];
+            $scope.zoomModelGallery05 = $scope.imagesForGallery[0];
         };
 
         //default
@@ -86,12 +97,7 @@ angular.module('colorboxdemo.controllers', []).
             loadingIcon: false
         };
 
-        $scope.zoomModel1 = $scope.imagesForGallery[0];
-        $scope.zoomModel2 = $scope.imagesForGallery[1];
 
-        $scope.zoomModelGallery01 = $scope.imagesForGallery[1];
-        $scope.zoomModelGallery04 = $scope.imagesForGallery[3];
-        $scope.zoomModelGallery05 = $scope.imagesForGallery[0];
         $scope.setActiveImageInGallery = function (prop, img) {
             $scope[prop] = img;
             //console.log(img);
