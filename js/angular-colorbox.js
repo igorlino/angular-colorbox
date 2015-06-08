@@ -12,11 +12,11 @@
                 open: '=',
                 templateUrl: '&',
 
-                onOpen: '&',
-                onLoad: '&',
-                onComplete: '&',
-                onCleanup: '&',
-                onClosed: '&'
+                onOpen: '&', //Callback that fires right before Colorbox begins to open.
+                onLoad: '&', //Callback that fires right before attempting to load the target content.
+                onComplete: '&', //Callback that fires right after loaded content is displayed.
+                onCleanup: '&', //Callback that fires at the start of the close process.
+                onClosed: '&' //Callback that fires once Colorbox is closed.
 
             },
             require: 'colorbox',
