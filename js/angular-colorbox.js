@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('colorbox')
+    angular.module('colorbox', [])
         .directive('colorbox', colorboxDirective);
 
     colorboxDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout'];
