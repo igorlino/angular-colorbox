@@ -3,6 +3,7 @@
 
     angular.module('colorbox', [])
         .service('colorboxService', colorboxService)
+        .directive('colorboxable', colorboxableDirective)
         .directive('colorbox', colorboxDirective);
 
     function colorboxService() {
@@ -64,6 +65,91 @@
         function remove() {
             $.colorbox.remove();
         }
+    }
+
+    colorboxableDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout', 'colorboxService'];
+    function colorboxableDirective($compile, $rootScope, $http, $parse, $timeout, colorboxService) {
+        var service = {
+            restrict: 'A',
+            link: colorboxableLink,
+            priority: 100 // must lower priority than ngSrc (99)
+        };
+        return service;
+
+        ////////////////////////////
+
+
+        colorboxableLink.$inject = ['$scope', '$element', '$attributes'];
+        function colorboxableLink($scope, $element, $attributes, controller) {
+            var cb = null;
+
+            $scope.$on('$destroy', function () {
+                $element.remove();
+            });
+
+            init();
+
+            function init(open) {
+                var options = {
+                    href: $attributes.src ? $attributes.src : $attributes.href,
+                    onComplete: function () {
+                        onComplete();
+                    }
+                };
+
+                //generic way that sets all (non-function) parameters of colorbox.
+                if ($attributes.colorboxable && $attributes.colorboxable.length>0) {
+                    var cbOptionsFunc = $parse($attributes.colorboxable);
+                    var cbOptions = cbOptionsFunc($scope);
+                    angular.extend(options, cbOptions);
+                }
+
+                //clean undefined
+                for (var key in options) {
+                    if (options.hasOwnProperty(key)) {
+                        if (typeof(options[key]) === 'undefined') {
+                            delete options[key];
+                        }
+                    }
+                }
+
+                if (typeof(open) !== 'undefined') {
+                    options.open = open;
+                }
+
+                //wait for the DOM view to be ready
+                $timeout(function () {
+
+                    if (!$attributes.ngSrc) {
+                        //opens the colorbox using an href.
+                        cb = $($element).colorbox(options);
+                    } else {
+                        //$element.bind('load', function() {
+                            /*$scope.$apply(function () {
+                                options.href = $attributes.src ? $attributes.src : $attributes.href;
+                                cb = $.colorbox(options);
+                            });*/
+                            //wait for the DOM view to be ready
+                            $timeout(function () {
+                                options.href = $attributes.src ? $attributes.src : $attributes.href;
+                                cb = $($element).colorbox(options);
+                            }, 300);
+                        //});
+                    }
+
+
+                }, 0);
+            }
+
+            function onComplete() {
+                $rootScope.$apply(function () {
+                    var content = $('#cboxLoadedContent');
+                    $compile(content)($rootScope);
+                });
+            }
+        }
+
+
     }
 
     colorboxDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout', 'colorboxService'];

@@ -42,18 +42,27 @@ In a browser:
 
 Include the Colorbox plug-in and the directive on a page.
 
-Basic
+Basic via attribute
 ```html
- <img    src="path_to_image" 
-        colorbox
-        colorbox-src="path_to_large_image" />
-```
+ <img id="cb_01" src="path_to_image" colorboxable>
 
-Extended
+Options via attribute
 ```html
- <img   src="path_to_image" 
-        colorbox
-        colorbox-options="{href:'images/large/image1.jpg', opacity:0.5, title:'A nice colorbox' }"
+ <img id="cb_01" src="path_to_image" colorboxable="{opacity:0.5}">
+
+
+Basic via tag
+```html
+ <img id="cb_02" src="path_to_image" >
+        
+<colorbox box-for="cb_02" />
+``````
+
+Options via tag
+```html
+ <img id="cb_03" src="path_to_image" >
+  
+<colorbox box-for="cb_03"  options="{href:'images/large/image1.jpg', opacity:0.5, title:'A nice colorbox' }" />
 ```
 
 For more information on how to setup and customise, [check the examples](http://igorlino.github.io/angular-colorbox/).
