@@ -1,6 +1,6 @@
 {
     "name": "angular-colorbox",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": {
         "name": "Igor Lino",
         "url": "http://igorlino.github.io/angular-colorbox/"
@@ -13,7 +13,7 @@
     ],
     "main": [
         "js/angular-colorbox.js",
-        "themes/dark/colorbox-darktheme-css"
+        "themes/dark/colorbox-darktheme.css"
     ],
     "ignore": [
         "**/.*",
