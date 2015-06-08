@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('colorbox', [])
-        .directive('colorboxService', colorboxService)
+        .service('colorboxService', colorboxService)
         .directive('colorbox', colorboxDirective);
 
     function colorboxService() {
@@ -66,8 +66,8 @@
         }
     }
 
-    colorboxDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout'];
-    function colorboxDirective($compile, $rootScope, $http, $parse, $timeout) {
+    colorboxDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout', 'colorboxService'];
+    function colorboxDirective($compile, $rootScope, $http, $parse, $timeout, colorboxService) {
         var service = {
             restrict: 'E',
             scope: {
@@ -116,7 +116,7 @@
                 if (newValue) {
                     init(newValue);
                 } else {
-                    $.colorbox.close();
+                    colorboxService.close();
                 }
             }
 
