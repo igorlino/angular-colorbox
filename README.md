@@ -33,10 +33,9 @@ npm install angular-colorbox
 In a browser:
 
 ```html
-<link rel="stylesheet" type="text/css" href="colorbox.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="themes/dark/colorbox-darktheme.css" media="screen" />
 <script src="jquery.colorbox.js"></script>
-<script src="colorbox-module.js"></script>
-<script src="colorbox-directive.js"></script>
+<script src="angular-colorbox.js"></script>
 ```
 
 ## Getting Started
