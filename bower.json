@@ -1,6 +1,6 @@
 {
     "name": "angular-colorbox",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": {
         "name": "Igor Lino",
         "url": "http://igorlino.github.io/angular-colorbox/"
@@ -12,8 +12,8 @@
         }
     ],
     "main": [
-        "js/colorbox.directive.js",
-        "js/colorbox.module.js"
+        "js/colorbox.module.js",
+        "js/colorbox.directive.js"
     ],
     "ignore": [
         "**/.*",
