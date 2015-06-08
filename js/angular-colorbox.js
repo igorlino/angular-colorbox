@@ -2,7 +2,69 @@
     'use strict';
 
     angular.module('colorbox', [])
+        .directive('colorboxService', colorboxService)
         .directive('colorbox', colorboxDirective);
+
+    function colorboxService() {
+
+        //Colorbox JavaScript API reference:
+        // http://www.jacklmoore.com/colorbox/
+
+        var service = {
+            colorbox: colorbox, //returns the colorbox jquery plugin
+            next: next,//
+            prev: prev,//These methods moves to the next and previous items in a group and are the same as pressing the 'next' or 'previous' buttons.
+            close: close,//This method initiates the close sequence, which does not immediately complete. The lightbox will be completely closed only when the cbox_closed event / onClosed callback is fired.
+            element: element,//This method is used to fetch the current HTML element that Colorbox is associated with. Returns a jQuery object containing the element. var $element = $.colorbox.element();
+            resize: resize,//This allows Colorbox to be resized based on it's own auto-calculations, or to a specific size. This must be called manually after Colorbox's content has loaded. The optional parameters object can accept width or innerWidth and height or innerHeight. Without specifying a width or height, Colorbox will attempt to recalculate the height of it's current content.
+            remove: remove//Removes all traces of Colorbox from the document. Not the same as $.colorbox.close(), which tucks colorbox away for future use.
+        };
+        return service;
+
+        ////////////
+
+
+        function colorbox() {
+            return $.colorbox;
+        }
+
+        /**These methods moves to the next and previous items in a group and are the same as pressing the 'next' or
+         * 'previous' buttons.*/
+        function next() {
+            $.colorbox.next();
+        }
+
+        /**These methods moves to the next and previous items in a group and are the same as pressing the 'next' or
+         * 'previous' buttons.*/
+        function prev() {
+            $.colorbox.prev();
+        }
+
+        /**This method initiates the close sequence, which does not immediately complete. The lightbox will be completely
+         * closed only when the cbox_closed event / onClosed callback is fired.*/
+        function close() {
+            $.colorbox.close();
+        }
+
+        /**This method is used to fetch the current HTML element that Colorbox is associated with. Returns a jQuery object
+         * containing the element. var $element = $.colorbox.element();*/
+        function element() {
+            return $.colorbox.element();
+        }
+
+        /**This allows Colorbox to be resized based on it's own auto-calculations, or to a specific size. This must be
+         * called manually after Colorbox's content has loaded. The optional parameters object can accept width or innerWidth
+         * and height or innerHeight. Without specifying a width or height, Colorbox will attempt to recalculate the height of it's current content. */
+        function resize() {
+            $.colorbox.resize();
+        }
+
+        /**Removes all traces of Colorbox from the document. Not the same as $.colorbox.close(), which tucks colorbox away
+         * for future use. */
+        function remove() {
+            $.colorbox.remove();
+        }
+    }
 
     colorboxDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout'];
     function colorboxDirective($compile, $rootScope, $http, $parse, $timeout) {
@@ -84,7 +146,7 @@
                         }
                     },
                     onClosed: function () {
-                        $scope.$apply(function() {
+                        $scope.$apply(function () {
                             $scope.open = false;
                         });
                         if ($scope.onClosed && $scope.onClosed()) {
