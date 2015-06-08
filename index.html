@@ -96,28 +96,40 @@
 
         <h2>Basic Colorbox modal example</h2>
 
-        <p class="lead">Use these examples as a way to quickly start any new web project that requires modals or image/gallery
-            modals.</p>
-
+        <p class="lead">Use these examples as a way to quickly start any new web project that requires colorbox modals.</p>
 
         <h2>Basic Click Example</h2>
 
         <p>Click the thumbnail image.</p>
 
         <img
-            id="zoom_01"
 
-            width="400"
-            ez-plus
-            ezp-model="zoomModel1"
-            ezp-options="zoomOptions"
+                width="400"
+                ng-src='{{approot}}images/large/image1.jpg'
 
-            />
+                colorboxable="{opacity:0.5, open:false}"
+                />
+
+        <hr/>
+
+        <h2>Basic Click on Example with ElevateZoom Plus</h2>
+
+        <p>Click the thumbnail image.</p>
+
+        <img
+                id="zoom_01"
+
+                width="400"
+                ez-plus
+                ezp-model="zoomModel1"
+                ezp-options="zoomOptions"
+
+                />
 
         <colorbox
-            box-for="#zoom_01"
-            open="zoom01"
-            options="{href:'{{approot}}images/large/image1.jpg'}">
+                box-for="#zoom_01"
+                open="zoom01"
+                options="{href:'{{approot}}images/large/image1.jpg'}">
 
         </colorbox>
 
@@ -128,19 +140,19 @@
         <p>Click the thumbnail image.</p>
 
         <img
-            id="zoom_01a"
-            width="400"
+                id="zoom_01a"
+                width="400"
 
-            ez-plus
-            ezp-model="zoomModel2"
-            ezp-options="zoomOptions"
+                ez-plus
+                ezp-model="zoomModel2"
+                ezp-options="zoomOptions"
 
-            />
+                />
 
         <colorbox
-            box-for="#zoom_01a"
-            open="zoom01a"
-            options="{href:'{{approot}}images/large/image2.jpg',  width:'75%', height:'75%'}">
+                box-for="#zoom_01a"
+                open="zoom01a"
+                options="{href:'{{approot}}images/large/image2.jpg',  width:'75%', height:'75%'}">
 
         </colorbox>
 
@@ -156,16 +168,16 @@
                href="{{approot}}{{image3.large}}"
 
                ng-click="setActiveImageInGallery('zoomModelGallery05',image3);"
-               >
+                    >
 
                 <img ng-src="{{approot}}{{image3.thumb}}"/>
             </a>
         </div>
 
         <colorbox
-            box-for=".img-group-05"
-            open="zoom05"
-            options="{rel:'img-group-05', slideshow:false, open:false}">
+                box-for=".img-group-05"
+                open="zoom05"
+                options="{rel:'img-group-05', slideshow:false, open:false}">
 
         </colorbox>
 
@@ -201,9 +213,9 @@
                 />
 
         <colorbox
-            box-for=".img-group-01"
-            open="zoom03"
-            options="{rel:'img-group-01', slideshow:false, open:false}">
+                box-for=".img-group-01"
+                open="zoom03"
+                options="{rel:'img-group-01', slideshow:false, open:false}">
         </colorbox>
 
 
