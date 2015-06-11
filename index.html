@@ -112,6 +112,23 @@
 
         <hr/>
 
+        <h2>Basic Click Example with callbacks</h2>
+
+        <p>Click the thumbnail image.</p>
+
+        <img
+                id="cbwithcallbacks"
+                width="400"
+                ng-src='{{approot}}images/large/image4.jpg'
+                />
+
+        <colorbox
+                box-for="#cbwithcallbacks"
+                options="colorboxWithCallbacks">
+        </colorbox>
+
+        <hr/>
+
         <h2>Basic Click on Example with ElevateZoom Plus</h2>
 
         <p>Click the thumbnail image.</p>
@@ -129,13 +146,12 @@
         <colorbox
                 box-for="#zoom_01"
                 open="zoom01"
-                options="{href:'{{approot}}images/large/image1.jpg'}">
-
+                options="{href: approot + 'images/large/image1.jpg'}">
         </colorbox>
 
         <hr/>
 
-        <h2>Basic Colorbox modal example with Width/Height 75%</h2>
+        <h2>Basic Colorbox modal example with Width/Height 75% and events</h2>
 
         <p>Click the thumbnail image.</p>
 
@@ -152,7 +168,7 @@
         <colorbox
                 box-for="#zoom_01a"
                 open="zoom01a"
-                options="{href:'{{approot}}images/large/image2.jpg',  width:'75%', height:'75%'}">
+                options="{href: approot + 'images/large/image2.jpg',  width:'75%', height:'75%'}">
 
         </colorbox>
 
@@ -215,6 +231,7 @@
         <colorbox
                 box-for=".img-group-01"
                 open="zoom03"
+                on-open="alert"
                 options="{rel:'img-group-01', slideshow:false, open:false}">
         </colorbox>
 
