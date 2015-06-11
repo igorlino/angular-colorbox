@@ -158,6 +158,7 @@
             restrict: 'E',
             scope: {
                 open: '=',
+                options: '=',
                 templateUrl: '&',
 
                 onOpen: '&', //Callback that fires right before Colorbox begins to open.
@@ -242,10 +243,8 @@
                 };
 
                 //generic way that sets all (non-function) parameters of colorbox.
-                if ($attributes.options) {
-                    var cbOptionsFunc = $parse($attributes.options);
-                    var cbOptions = cbOptionsFunc($scope);
-                    angular.extend(options, cbOptions);
+                if ($scope.options) {
+                    angular.extend(options, $scope.options);
                 }
 
                 //clean undefined
