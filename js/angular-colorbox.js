@@ -18,7 +18,9 @@
             close: close,//This method initiates the close sequence, which does not immediately complete. The lightbox will be completely closed only when the cbox_closed event / onClosed callback is fired.
             element: element,//This method is used to fetch the current HTML element that Colorbox is associated with. Returns a jQuery object containing the element. var $element = $.colorbox.element();
             resize: resize,//This allows Colorbox to be resized based on it's own auto-calculations, or to a specific size. This must be called manually after Colorbox's content has loaded. The optional parameters object can accept width or innerWidth and height or innerHeight. Without specifying a width or height, Colorbox will attempt to recalculate the height of it's current content.
-            remove: remove//Removes all traces of Colorbox from the document. Not the same as $.colorbox.close(), which tucks colorbox away for future use.
+            remove: remove,//Removes all traces of Colorbox from the document. Not the same as $.colorbox.close(), which tucks colorbox away for future use.
+
+            getCurrentPhoto: getCurrentPhoto //Gets the current photo being shown, if any
         };
         return service;
 
@@ -65,6 +67,13 @@
         function remove() {
             $.colorbox.remove();
         }
+
+        /**Gets the current photo being shown, if any.*/
+        function getCurrentPhoto() {
+            var anyPhoto = $('#cboxLoadedContent .cboxPhoto');
+            var photo = anyPhoto.length > 0 ? anyPhoto[0] : null;
+            return photo;
+        }
     }
 
     colorboxableDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout', 'colorboxService'];
@@ -98,7 +107,7 @@
                 };
 
                 //generic way that sets all (non-function) parameters of colorbox.
-                if ($attributes.colorboxable && $attributes.colorboxable.length>0) {
+                if ($attributes.colorboxable && $attributes.colorboxable.length > 0) {
                     var cbOptionsFunc = $parse($attributes.colorboxable);
                     var cbOptions = cbOptionsFunc($scope);
                     angular.extend(options, cbOptions);
@@ -125,15 +134,15 @@
                         cb = $($element).colorbox(options);
                     } else {
                         //$element.bind('load', function() {
-                            /*$scope.$apply(function () {
-                                options.href = $attributes.src ? $attributes.src : $attributes.href;
-                                cb = $.colorbox(options);
-                            });*/
-                            //wait for the DOM view to be ready
-                            $timeout(function () {
-                                options.href = $attributes.src ? $attributes.src : $attributes.href;
-                                cb = $($element).colorbox(options);
-                            }, 300);
+                        /*$scope.$apply(function () {
+                         options.href = $attributes.src ? $attributes.src : $attributes.href;
+                         cb = $.colorbox(options);
+                         });*/
+                        //wait for the DOM view to be ready
+                        $timeout(function () {
+                            options.href = $attributes.src ? $attributes.src : $attributes.href;
+                            cb = $($element).colorbox(options);
+                        }, 300);
                         //});
                     }
 
