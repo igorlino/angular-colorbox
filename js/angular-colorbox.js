@@ -6,6 +6,7 @@
         .directive('colorboxable', colorboxableDirective)
         .directive('colorbox', colorboxDirective);
 
+    colorboxService.$inject = [];
     function colorboxService() {
 
         //Colorbox JavaScript API reference:
@@ -25,7 +26,6 @@
         return service;
 
         ////////////
-
 
         function colorbox() {
             return $.colorbox;
@@ -76,8 +76,8 @@
         }
     }
 
-    colorboxableDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout', 'colorboxService'];
-    function colorboxableDirective($compile, $rootScope, $http, $parse, $timeout, colorboxService) {
+    colorboxableDirective.$inject = ['$compile', '$rootScope', '$parse', '$timeout'];
+    function colorboxableDirective($compile, $rootScope, $parse, $timeout) {
         var service = {
             restrict: 'A',
             link: colorboxableLink,
@@ -89,7 +89,7 @@
 
 
         colorboxableLink.$inject = ['$scope', '$element', '$attributes'];
-        function colorboxableLink($scope, $element, $attributes, controller) {
+        function colorboxableLink($scope, $element, $attributes) {
             var cb = null;
 
             $scope.$on('$destroy', function () {
@@ -161,8 +161,8 @@
 
     }
 
-    colorboxDirective.$inject = ['$compile', '$rootScope', '$http', '$parse', '$timeout', 'colorboxService'];
-    function colorboxDirective($compile, $rootScope, $http, $parse, $timeout, colorboxService) {
+    colorboxDirective.$inject = ['$compile', '$rootScope', '$timeout', 'colorboxService'];
+    function colorboxDirective($compile, $rootScope, $timeout, colorboxService) {
         var service = {
             restrict: 'E',
             scope: {
@@ -177,22 +177,15 @@
                 onClosed: '&' //Callback that fires once Colorbox is closed.
 
             },
-            require: 'colorbox',
             link: link,
-            controller: controller,
             controllerAs: 'vm'
         };
         return service;
 
         ////////////////////////////
 
-        controller.$inject = ['$scope'];
-        function controller($scope) {
-
-        }
-
         link.$inject = ['$scope', '$element', '$attributes'];
-        function link($scope, $element, $attributes, controller) {
+        function link($scope, $element, $attributes) {
             var cb = null;
 
             $scope.$watch('open', function (newValue, oldValue) {
@@ -288,62 +281,6 @@
                 });
             }
         }
-
-
     }
-
-    /*
-     app.directive('xhrModal', ['$http','$compile',
-     function ($http, $compile) {
-     function compile (elem, cAtts) {
-     var template,
-     $element,
-     loader;
-     loader = $http.get(cAtts.template).success(function (resp) {
-     template = resp;
-     });
-
-     return function (scope, elem, lAtts) {
-     loader.then(function () {
-     $element = $compile(template)(scope);
-     });
-     scope.close = function() {
-     jQuery.colorbox.close();
-     };
-     scope.submit = function() {
-     var result = scope.formSubmit();
-     if (Object.isObject(result)) {
-     result.success(function() {
-     jQuery.colorbox.close();
-     });
-     } else if (result === false) {
-     //noop
-     } else {
-     jQuery.colorbox.close();
-     }
-     };
-     elem.on('click', function(e) {
-     e.preventDefault();
-     jQuery.colorbox({inline: true, href: $element});
-     });
-     }
-     }
-
-     return {
-     scope: {
-     formObject: '=',
-     formErrors: '=',
-     title: '@',
-     template: '@',
-     okButtonText: '@',
-     formSubmit: '&'
-     },
-     compile: compile
-     }
-     }
-     ]);
-
-     */
-
 })
 ();

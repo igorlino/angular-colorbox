@@ -1,6 +1,6 @@
 {
     "name": "angular-colorbox",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "title": "Angular Colorbox",
     "description": "Angular directive for Colorbox, the jQuery lightbox and modal window plugin.",
     "keywords": [
